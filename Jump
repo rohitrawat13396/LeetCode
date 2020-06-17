@@ -12,3 +12,19 @@ class Solution:
             max_pos = max(max_pos,nums[i]+i)
             
         return True
+        
+ #Backtracking : Time limit Exceeded
+# class Solution:    
+#     def possiblejump(self, pos, nums):
+#         # print("pos",pos)
+#         n = len(nums)
+#         if pos == n-1:
+#             # print(pos)
+#             return True
+#         furthestjump = min(pos + nums[pos],n-1)
+#         for np in range(pos+1,furthestjump+1):
+#             if self.possiblejump(np, nums):
+#                 return True        
+        
+#     def canJump(self, nums: List[int]) -> bool:
+#         return self.possiblejump(0, nums)
