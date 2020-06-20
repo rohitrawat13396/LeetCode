@@ -1,4 +1,4 @@
-#Basic function
+#Basic function in O(n) as min() is used over list
 class MinStack:
 
     def __init__(self):
