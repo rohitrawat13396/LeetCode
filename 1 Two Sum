@@ -1,0 +1,27 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        '''   
+             for i in nums:
+                    for j in range(len(nums)):
+                        if ((target-i == nums[j]) and (j!=nums.index(i))):
+                            x= nums.index(i)
+                            return[x,j]
+
+
+        '''
+   
+        # hm = {}
+        # for i,num in enumerate(nums):
+        #     residue = target - num
+        #     if residue not in hm:
+        #         hm[num]=i
+        #     else:
+        #         return [hm[residue],i]
+        
+        hm = {}
+        for i,num in enumerate(nums):
+            res = target - num
+            if res not in hm:
+                hm[num] = i
+            else:
+                return[i,hm[res]]
