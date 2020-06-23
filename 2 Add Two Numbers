@@ -1,0 +1,55 @@
+# You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+# You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode,c=0) -> ListNode:
+#         x = l1.val + l2.val + c
+        
+#         if x >= 10:
+#             c = 1
+#         else:
+#             c = 0
+            
+#         new_node = ListNode(x % 10)
+#         if (l1.next != None or l2.next != None or c!=0):
+#             if l1.next == None:
+#                 l1.next = ListNode(0)
+#             if l2.next == None:
+#                 l2.next = ListNode(0)           
+#             new_node.next = self.addTwoNumbers(l1.next,l2.next,c)
+        
+#         return new_node
+
+        
+        num1 = 0
+        num2 = 0
+        i=0
+        while(l1!= None or l2!=None):
+            if l1 is not None:
+                num1 = num1 + l1.val*(10**i)
+                l1 = l1.next
+            if l2 is not None:
+                num2 = num2 + l2.val*(10**i)
+                l2 = l2.next
+            i += 1
+        final = num1 + num2
+        head_node = ListNode(final%10)
+        length = len(str(final))
+        final = final//10
+        final_list = head_node
+        while(length-1):
+            rem = final%10
+            new_node = ListNode(rem)
+            final_list.next = new_node
+            final_list = final_list.next
+            final = final//10
+            length -= 1
+        return head_node
+        
