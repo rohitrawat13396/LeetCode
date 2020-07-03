@@ -1,0 +1,27 @@
+# 62. Unique Paths
+# Input: m = 3, n = 2
+# Output: 3
+# Explanation:
+# From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+# 1. Right -> Right -> Down
+# 2. Right -> Down -> Right
+# 3. Down -> Right -> Right
+
+# import numpy as np
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+#         Method1: Time Limit Exceeded
+#         if m==1 or n==1:
+#             return 1
+        
+#         return self.uniquePaths(m-1,n)+ self.uniquePaths(m,n-1)
+
+#         Method2: DP for O(n*m)
+        # d = np.ones((m,n), dtype = int) 
+        d = [[1]*n for _ in range(m)]   # Without np.ones() it's faster.
+    
+        for r in range(1,m):
+            for c in range(1,n):
+                d[r][c] = d[r-1][c] + d[r][c-1]
+#        print(d)
+        return d[m-1][n-1]        
