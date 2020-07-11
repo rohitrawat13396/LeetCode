@@ -1,0 +1,64 @@
+# 10. Regular Expression Matching
+# Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+# '.' Matches any single character.
+# '*' Matches zero or more of the preceding element.
+# The matching should cover the entire input string (not partial).
+
+# Note:
+
+# s could be empty and contains only lowercase letters a-z.
+# p could be empty and contains only lowercase letters a-z, and characters like . or *.
+# Example 1:
+
+# Input:
+# s = "aa"
+# p = "a"
+# Output: false
+# Explanation: "a" does not match the entire string "aa".
+    
+import re
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        '''
+        flag =0
+        i=0
+        #old = ''
+        #print(len(s))
+        for j in range(len(p)):
+            if i != len(s):
+                if p[j] == '.':
+                    #print(p.replace(p[j],s[i],1))# String is immutable and cannot be assigned new value. replace the value one time but cannot change the original value.
+                    #old = p[j]
+                    #print(p)
+                    flag =1
+                    i+=1
+                    continue
+                elif (s[i] == p[j]):
+                    flag = 1
+                    i+=1
+                    continue
+                elif p[j] == '*':
+                    #print(p[j-1])
+                                           
+                    while (s[i] == p[j-1] ) or (p[j-1] == '.'):
+                        i+=1
+                        if i == len(s):
+                            break
+                            
+                elif j+1<len(p):
+                    if p[j+1]!='*':
+                        flag = 0
+                        break
+            elif p[j]!='*' and p[j]!='.':   #.*..
+                if p[j]!=s[i-1] or p[j-1]!='*':
+                    try:
+                        if p[j+1]!='*':
+                            flag = 0
+                            break
+                    except:
+                        flag = 0
+                        break
+        #return True if flag and i== len(s)  else False
+        '''
+        return re.match(p+'$',s)!=None
