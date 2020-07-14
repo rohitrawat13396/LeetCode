@@ -1,0 +1,20 @@
+# 290. Word Pattern
+
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+#Method1. single hashmap
+#         dic = {}
+#         lstr = str.split()
+        
+#         if len(set(pattern)) != len(set(lstr)) or len(pattern) != len(lstr):
+#             return False.
+        
+#         for i in range(len(pattern)):
+#             if pattern[i] not in dic:
+#                 dic[pattern[i]]= lstr[i]
+#             elif lstr[i]!= dic[pattern[i]]:
+#                 return False
+#         return True
+#Method2. map
+        str, pattern = str.split(), list(pattern)
+        return list(map(str.index, str)) == list(map(pattern.index, pattern))
