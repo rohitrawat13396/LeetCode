@@ -1,0 +1,45 @@
+# 1239. Maximum Length of a Concatenated String with Unique Characters
+
+# Given an array of strings arr. String s is a concatenation of a sub-sequence of arr which have unique characters.
+
+# Return the maximum possible length of s.
+
+ 
+
+# Example 1:
+
+# Input: arr = ["un","iq","ue"]
+# Output: 4
+# Explanation: All possible concatenations are "","un","iq","ue","uniq" and "ique".
+# Maximum length is 4.
+
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        
+        n = len(arr)
+        if n ==0:
+            return 0
+        del_list = []
+        
+        for i in range(len(arr)):
+            if len(arr[i])!=len(set(arr[i])):
+                del_list.append(arr[i])
+
+        for element in del_list:
+            arr.remove(element)
+            
+        self.result = 0
+        # print(arr)
+        def helper(arr, temp, pos):
+            self.result = max(self.result, len(temp))            
+            for i in range(pos,len(arr)):
+                to_check = temp + arr[i]
+                is_all_unique = (len(set(to_check)) == len(to_check))
+                if is_all_unique:
+                    helper(arr, to_check, i+1)
+        helper(arr, '',0)
+        return self.result
+
+
+    
+                               
