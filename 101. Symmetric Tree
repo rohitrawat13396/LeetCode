@@ -1,0 +1,68 @@
+# 101. Symmetric Tree
+# Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+# For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+
+#     1
+#    / \
+#   2   2
+#  / \ / \
+# 3  4 4  3
+ 
+
+# But the following [1,2,2,null,3,null,3] is not:
+
+#     1
+#    / \
+#   2   2
+#    \   \
+#    3    3
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+    #Method1. Postorder and Inorder recursion
+#         if not root:
+#             return True
+#         self.result = []
+#         self.result2 = []
+            
+#         def postorder(root,i):
+#             i +=1
+#             if not root:
+#                 return
+#             postorder(root.left,i)
+#             postorder(root.right,i)
+#             self.result.append(str(root.val)+'_'+str(i))
+#             return self.result
+        
+#         def inorder(root,i):
+#             i +=1
+#             if not root:
+#                 return
+#             inorder(root.left,i)
+#             self.result2.append(str(root.val)+'_'+str(i))
+#             inorder(root.right,i)            
+#             return self.result2        
+#         postorder(root,0)
+#         inorder(root,0)
+#         root_val_ind = self.result2.index(self.result[-1])
+#         if self.result2[:root_val_ind][::-1] == self.result2[root_val_ind+1:]:
+#             return True
+#         else:
+#             return False
+
+    #Method2. just Recursion O(n)
+        def is_mirror(t1, t2):
+            if (not t1) and (not t2): 
+                return True
+            if not t1 or not t2: 
+                return False            
+            return ((t1.val == t2.val) and is_mirror(t1.right, t2.left) and is_mirror(t1.left,t2.right))
+        
+        return is_mirror(root,root)
