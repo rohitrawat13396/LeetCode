@@ -1,0 +1,61 @@
+# 18. 4Sum
+# Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+
+# Note:
+
+# The solution set must not contain duplicate quadruplets.
+
+# Example:
+
+# Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
+
+# A solution set is:
+# [
+#   [-1,  0, 0, 1],
+#   [-2, -1, 1, 2],
+#   [-2,  0, 0, 2]
+# ]
+# '
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        '''nums.sort()
+        fsol = []
+        h={}
+        for i in range(len(nums)):
+            res1 = target - nums[i]
+            for j in range(len(nums)-2):
+                if j>0 and nums[j]==nums[j-1] or j==i:
+                    continue
+                l,r=j+1,len(nums)-1
+                while(l<r):
+                    three_sum=nums[j]+nums[l]+nums[r]
+                    if three_sum==res1 and l!=i and r!=i:
+                        tsol = [nums[i],nums[j],nums[l],nums[r]]
+                        tsol.sort()
+                        if tsol not in fsol:
+                            fsol.append(tsol)
+                        l+=1
+                        r-=1
+                    elif three_sum<res1:
+                        l+=1
+                    else:
+                        r-=1
+        return fsol'''
+        from collections import defaultdict
+        hmap = defaultdict(list)
+        nums.sort()
+        if not nums or nums[len(nums)-1]*4<target or nums[0]*4>target:
+            return []
+        fsol = set([])
+        for i in range(len(nums)-1):
+            for j in range(i+1,len(nums)):
+                sumij = nums[i]+nums[j]
+                reskl = target - sumij
+                
+                for (k,l) in hmap[reskl]:
+                    if k not in (i,j) and l not in (i,j):
+                        fsol.add(tuple(sorted([nums[i],nums[j],nums[k],nums[l]])))
+                hmap[sumij].append([i,j])
+        print(fsol)       
+        return list(fsol)
+
