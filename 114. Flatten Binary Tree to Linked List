@@ -1,0 +1,83 @@
+# 114. Flatten Binary Tree to Linked List
+
+# Given a binary tree, flatten it to a linked list in-place.
+
+# For example, given the following tree:
+
+#     1
+#    / \
+#   2   5
+#  / \   \
+# 3   4   6
+# The flattened tree should look like:
+
+# 1
+#  \
+#   2
+#    \
+#     3
+#      \
+#       4
+#        \
+#         5
+#          \
+#           6
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+#     Method1. Not in-place but working
+
+#     def postorder(self, root2,result):
+#         if not root2:
+#             return
+#         result.append(root2.val)
+#         self.postorder(root2.left,result)
+#         self.postorder(root2.right,result)            
+#         return result
+#     def list_to_linked(self, root2):
+#         result = []
+#         result = self.postorder(root2,result)
+#         i=1
+#         root2 = root1 =  TreeNode(result[0])
+#         while i<len(result): 
+#             root1.right = TreeNode(result[i]) 
+#             root1 = root1.right
+#             i += 1
+#         return root2
+#     def flatten(self, root: TreeNode) -> None:
+#         """
+#         Do not return anything, modify root in-place instead.
+#         """
+       
+#         self.list_to_linked(root)
+        
+        
+    #Method2 in-place
+    def flatten(self, root: TreeNode) -> None:
+        
+        def flattentree(root):
+            
+            if not root:
+                return
+            if not root.left and not root.right:
+                return root
+            
+            lefttail = flattentree(root.left)
+            righttail = flattentree(root.right)
+            
+            if lefttail:
+                lefttail.right = root.right
+                root.right = root.left
+                root.left = None
+            return righttail if righttail else lefttail
+        flattentree(root)
+        
+    #Method3. iteration approach 3 is more articulate.
+            
+
+        
