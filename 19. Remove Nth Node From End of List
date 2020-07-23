@@ -1,0 +1,75 @@
+# 19. Remove Nth Node From End of List
+
+# Given a linked list, remove the n-th node from the end of list and return its head.
+
+# Example:
+
+# Given linked list: 1->2->3->4->5, and n = 2.
+
+# After removing the second node from the end, the linked list becomes 1->2->3->5.
+
+
+# # Definition for singly-linked list.
+# # class ListNode:
+# #     def __init__(self, x):
+# #         self.val = x
+# #         self.next = None
+
+# class Solution:
+#     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+#         '''newpointer = head
+#         leng =1
+#         newpointer1 =  head
+#         while(newpointer1.next != None):
+#             leng+=1
+#             newpointer1 = newpointer1.next
+
+#         n = leng-n 
+
+#         if n==0:
+#             head=head.next
+#             return head
+        
+#         for i in range(n+1):
+
+#             if i == n:
+#                 prev.next = newpointer.next
+                
+#             else:
+#                 prev = newpointer
+#                 if newpointer.next!=None:
+#                     newpointer= newpointer.next
+#         return head
+#         dummy = ListNode(0)
+#         dummy.next = head
+#         first = dummy
+#         second = dummy
+        
+#         i=1
+#         while(i<n+1):
+#             second = second.next
+#             i+=1
+            
+#         while(second.next!=None):
+#             second = second.next
+#             first = first.next
+
+#         first.next= first.next.next
+#         return dummy.next'''
+    
+#         first = head
+#         sec = head
+#         if not head:
+#             return None
+#         for i in range(n):
+#             sec = sec.next
+#         if sec == None:
+#             return head.next
+#         while sec.next:
+#             first = first.next
+#             sec = sec.next
+#         first.next = first.next.next
+#         return head
+        
+        
+            
