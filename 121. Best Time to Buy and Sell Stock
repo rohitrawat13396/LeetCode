@@ -1,0 +1,27 @@
+# 121. Best Time to Buy and Sell Stock
+
+# Input: [7,1,5,3,6,4]
+# Output: 5
+# Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+#              Not 7-1 = 6, as selling price needs to be larger than buying price.
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        #Method0. Buy every element and sell the max of the rest O(n^2)
+        # max_profit = 0
+        # for i in range(len(prices)-1):
+        #     max_profit = max(max_profit,max(prices[i+1:])-prices[i])
+        # return max_profit
+        
+        #Method1. Maintaining minimum_price and max_profit
+        if not prices:
+            return 0
+        min_price = prices[0]
+        max_profit = 0
+        for i in range(1,len(prices)):
+            min_price = min(prices[i], min_price)
+            max_profit = max(prices[i]-min_price, max_profit)
+        return max_profit
+                
+        
+        
