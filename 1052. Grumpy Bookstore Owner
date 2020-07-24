@@ -1,0 +1,33 @@
+# 1052. Grumpy Bookstore Owner
+
+# Input: customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3
+# Output: 16
+# Explanation: The bookstore owner keeps themselves not grumpy for the last 3 minutes. 
+# The maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 16.
+
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], X: int) -> int:
+        #Method1. sliding window, subtractinf first element and adding next element
+        if len(customers)<=3:
+            return sum(customers)
+        fixed_sum = 0   
+        for i in range(len(grumpy)):
+            if grumpy[i]==0:
+                fixed_sum += customers[i]
+        
+        masked_list = []
+        n = len(customers)
+        for i in range(len(customers)):            
+            if grumpy[i]==0:
+                masked_list.append(0)
+            else:
+                masked_list.append(customers[i])
+        max_sum_window = sum(masked_list[:X])
+        window_size = max_sum_window 
+
+        window_start = 0
+        for i,end_value in enumerate(masked_list[X:]):
+            window_size += end_value - masked_list[window_start]  
+            window_start +=1
+            max_sum_window = max(max_sum_window,window_size)
+        return max_sum_window + fixed_sum
