@@ -1,0 +1,45 @@
+# 136. Single Number
+
+# Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+
+# Note:
+
+# Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+# Example 1:
+
+# Input: [2,2,1]
+# Output: 1
+# Example 2:
+
+# Input: [4,1,2,1,2]
+# Output: 4
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        
+        #Method0. Using Dictionary
+#         hmap = {}
+#         for num in nums:
+#             if num not in hmap:
+#                 hmap[num] = 1
+#             else:
+#                 hmap[num] += 1
+#         # print(hmap)
+        
+#         for num in hmap.keys():
+#             if hmap[num] == 1:
+#                 return num
+        
+#         #Method1. Using set for fast loop up
+#         no_duplicate = set()
+#         for num in nums:
+#             if num not in no_duplicate:
+#                 no_duplicate.add(num)
+#             else:
+#                 no_duplicate.remove(num)
+#         return list(no_duplicate).pop()
+    
+        #Method2. Using sum and product
+    
+        return 2*sum(set(nums)) - sum(nums)
