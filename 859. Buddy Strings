@@ -1,0 +1,27 @@
+# 859. Buddy Strings
+# Given two strings A and B of lowercase letters, return true if and only if we can swap two letters in A so that the result equals B.
+
+
+
+class Solution:
+    def buddyStrings(self, A: str, B: str) -> bool:
+        
+        if len(A) != len(B):
+            return False
+        uneq = []
+        seen = []
+        if A == B:
+            for a in A:
+                if a in seen:
+                    return True
+                seen.append(a)
+            return False
+        for i in range(len(A)):
+            if A[i] != B[i]:
+                uneq.append([A[i],B[i]])
+            if len(uneq) >2:
+                return False
+        return  len(uneq) == 2 and uneq[0] == uneq[1][::-1]
+
+                
+        
