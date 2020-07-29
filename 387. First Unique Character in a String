@@ -1,0 +1,27 @@
+# 387. First Unique Character in a String
+
+# Examples:
+
+# s = "leetcode"
+# return 0.
+
+# s = "loveleetcode"
+# return 2.
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        
+        # hmap = Counter(s)
+        # if not s:
+        #     return -1
+        hmap = {}
+        for i in range(len(s)):
+            if s[i] not in hmap:
+                hmap[s[i]] = [1,i]
+            else:
+                hmap[s[i]][0] += 1
+            
+        for l in s:
+            if hmap[l][0] == 1:
+                return hmap[l][1]
+        return -1
