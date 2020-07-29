@@ -1,0 +1,60 @@
+# 1007. Minimum Domino Rotations For Equal Row
+
+# Input: A = [2,1,2,4,2,2], B = [5,2,6,2,3,2]
+# Output: 2
+# Explanation: 
+# The first figure represents the dominoes as given by A and B: before we do any rotations.
+# If we rotate the second and fourth dominoes, we can make every value in the top row equal to 2, as indicated by the second figure.
+
+# Example 2:
+
+# Input: A = [3,5,1,2,3], B = [3,6,3,3,4]
+# Output: -1
+# Explanation: 
+# In this case, it is not possible to rotate the dominoes to make one row of values equal.
+
+
+class Solution:
+    def minDominoRotations(self, A: List[int], B: List[int]) -> int:
+        if len(A) != len(B):
+            return -1
+        set1,set2 =  set(A), set(B)
+        if len(set1) ==1 or len(set2) ==1:
+            return 0
+        res = float('inf')
+        for s1 in [A[0],B[0]]:
+            i=0
+            count = 0
+            while(i<len(A)):
+                if A[i] == s1:
+                    i+=1
+                    continue
+                elif B[i] == s1:
+                    i +=1
+                    count +=1
+                else:
+                    count = 0
+                    break
+            # print(s1, count)
+            if count>0:
+                res = min(count, res)
+        # print("first",res)
+
+        for s1 in [A[0],B[0]]:
+            i=0
+            count = 0
+            while(i<len(B)):
+                if B[i] == s1:
+                    i+=1
+                    continue
+                elif A[i] == s1:
+                    i +=1
+                    count +=1
+                else:
+                    count = 0
+                    break
+            # print(s1, count)
+            if count>0:
+                res = min(count, res)
+                
+        return res if res != float('inf') else -1
