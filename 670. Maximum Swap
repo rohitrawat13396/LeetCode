@@ -1,0 +1,39 @@
+# 670. Maximum Swap
+
+# Given a non-negative integer, you could swap two digits at most once to get the maximum valued number. Return the maximum valued number you could get.
+
+
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        
+        if not num:
+            return num
+        l = list(str(num))
+        sorted_l = sorted(set(l),reverse = True)
+        
+        max_dig = float('-inf')
+        ind = 0
+        res = num
+        for n in sorted_l:
+            for i in range(len(l)-1,-1,-1):
+                if n == l[i]:
+                    ind = i
+                    break
+            max_dig = int(n)
+
+            for i in range(len(l)):
+                if max_dig == int(l[i]):
+                    continue
+                elif max_dig> int(l[i]):
+                    if ind > i and max_dig >= int(max(l[i:ind])):
+                        l[i],l[ind] = l[ind],l[i]
+                        ans = ""
+                        res= max(int(ans.join(l)),res)                     
+                    if res > num:
+                        return res
+        return res
+                
+
+            
+                
+                
