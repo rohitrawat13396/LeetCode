@@ -1,0 +1,30 @@
+206. Reverse Linked List
+
+
+# Reverse a singly linked list.
+
+# Example:
+
+# Input: 1->2->3->4->5->NULL
+# Output: 5->4->3->2->1->NUL
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        l = []
+        head2 = head
+        while head:
+            l.append(head.val)
+            head = head.next
+        if len(l) <2:
+            return head2
+        head = head2
+        for i in range(len(l)):
+            head.val = l[len(l)-i-1]
+            head = head.next        
+        return head2
+            
