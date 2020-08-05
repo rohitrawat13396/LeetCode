@@ -1,0 +1,15 @@
+# 41. First Missing Positive
+# Given an unsorted integer array, find the smallest missing positive integer.
+
+
+
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        i=1
+        nums = set(nums)
+        while True:
+            if i in nums:
+                i+=1
+            else:
+                return i
+            
