@@ -1,0 +1,37 @@
+# 207. Course Schedule
+
+# There are a total of numCourses courses you have to take, labeled from 0 to numCourses-1.
+
+# Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+
+# Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        adjList = [[] for _ in range(numCourses)]
+        for prereq in prerequisites:
+            adjList[prereq[1]].append(prereq[0])
+        
+        visited = [0] * numCourses
+        recStack = [0] * numCourses
+        
+        def isCycle(visited, recStack, current, adjList):
+            if recStack[current] == 1:
+                return True
+            if visited[current] == 1:
+                return
+            
+            recStack[current] = 1
+            visited[current] = 1
+            for neighbour in adjList[current]:
+                if isCycle(visited, recStack, neighbour, adjList) == True:
+                    return True
+            recStack[current] = 0
+        
+        for course in range(numCourses):
+            if isCycle(visited, recStack, course, adjList):
+                return False
+        return True
+ 
