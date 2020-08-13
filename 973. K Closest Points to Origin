@@ -1,0 +1,17 @@
+# 973. K Closest Points to Origin
+# We have a list of points on the plane.  Find the K closest points to the origin (0, 0).
+
+# (Here, the distance between two points on a plane is the Euclidean distance.)
+
+# You may return the answer in any order.  The answer is guaranteed to be unique (except for the order that it is in.)
+
+
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        
+        #Method 0. sorted method  in O(NlogN) but for worst case scenario O(N^2)
+        # return sorted(points, key = lambda x: sqrt(x[0]**2 + x[1]**2))[:K]  
+        
+        #Method1. Using Heapq in O(log(k)+N) 
+        return [x[1] for x in heapq.nsmallest(K, [(p[0]**2 + p[1]**2, p) for p in points])]
+ 
