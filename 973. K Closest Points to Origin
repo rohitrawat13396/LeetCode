@@ -12,6 +12,6 @@ class Solution:
         #Method 0. sorted method  in O(NlogN) but for worst case scenario O(N^2)
         # return sorted(points, key = lambda x: sqrt(x[0]**2 + x[1]**2))[:K]  
         
-        #Method1. Using Heapq in O(log(k)+N) 
+        #Method1. Using Heapq in O(log(k)*N + k*logk) 
         return [x[1] for x in heapq.nsmallest(K, [(p[0]**2 + p[1]**2, p) for p in points])]
  
