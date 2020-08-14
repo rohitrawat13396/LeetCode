@@ -1,0 +1,39 @@
+import collections
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        
+        graph = collections.defaultdict(list)
+        indegrees =  collections.defaultdict(int)
+
+        
+        for rel in prerequisites:
+            graph[rel[1]].append(rel[0])
+            indegrees[rel[0]] +=1
+        
+        zero_queue = deque([ k for  k in range(numCourses) if k not in indegrees])
+        
+        topological_order = []
+        
+        while zero_queue:
+            
+            zeronode = zero_queue.popleft()
+            topological_order.append(zeronode)
+            
+            for node in graph[zeronode]:
+                indegrees[node] -=1
+                
+                if indegrees[node] ==0:
+                    zero_queue.append(node)
+                    
+        return topological_order if len(topological_order) == numCourses else []
+        
+
+                
+        
+            
+        
+            
+        
+            
+        
+        
