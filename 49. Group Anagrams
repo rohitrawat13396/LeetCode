@@ -1,0 +1,24 @@
+# 49. Group Anagrams
+# Given an array of strings, group anagrams together.
+
+# Example:
+
+# Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+# Output:
+# [
+#   ["ate","eat","tea"],
+#   ["nat","tan"],
+#   ["bat"]
+# ]
+
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        from collections import defaultdict
+        h = defaultdict(list)
+        
+        for i in strs:
+            h[tuple(sorted(i))].append(i)
+        return h.values()            
+                
+        
