@@ -17,16 +17,53 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+#Method0. O(n) time but O(n) space
+# class Solution:
+#     def isPalindrome(self, head: ListNode) -> bool:
+        
+#         elements = []
+#         while head:
+#             elements.append(head.val)
+#             head = head.next
+#         if elements == elements[::-1]:
+#             return True
+#         else:
+#             return False
+
+# Method 1. O(n) Time and O(1) space
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
-        
-        elements = []
-        while head:
-            elements.append(head.val)
-            head = head.next
-        if elements == elements[::-1]:
+        if head is None or head.next is None:
             return True
-        else:
-            return False
+        
+        slow = head
+        fast = head
+        
+        while(fast is not None and fast.next is not None):
+            slow = slow.next
+            fast = fast.next.next
+            
+        slow = self.reverseList(slow)
+        fast = head
+        
+        while(slow):
+            if slow.val != fast.val:
+                return False
+            slow = slow.next
+            fast = fast.next
+            
+        return True
+    
+    def reverseList(self, node):
+        current = node
+        previous = None
+        
+        while(current):
+            currentNext = current.next
+            current.next = previous
+            previous = current
+            current = currentNext
+            
+        return previous
 
         
