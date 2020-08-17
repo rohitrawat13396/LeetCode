@@ -1,0 +1,58 @@
+# 212. Word Search II
+
+# Example:
+
+# Input: 
+# board = [
+#   ['o','a','a','n'],
+#   ['e','t','a','e'],
+#   ['i','h','k','r'],
+#   ['i','f','l','v']
+# ]
+# [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]
+# ["oath","pea","oaths","rain"]
+
+# {'o': {'a': {'t': {'h': {'$': 'oath', 's': {'$': 'oaths'}}}}}, 'p': {'e': {'a': {'$': 'pea'}}}, 'r': {'a': {'i': {'n': {'$': 'rain'}}}}}
+
+# Output: ["oath"]
+    
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+
+        #Method0. Using Trie and Backtracking
+        WORD_KEY = '$'
+        
+        trie = {}
+        for word in words:
+            node = trie
+            for letter in word:
+                node = node.setdefault(letter, {})
+            node[WORD_KEY] = word
+        
+        rows, cols = len(board), len(board[0])
+        resultWords = []
+        
+        def backtrack(row, col, parent):
+            letter = board[row][col]    #Needed to restore
+            currentNode = parent[board[row][col]]
+            word = currentNode.pop(WORD_KEY,False)
+            if word:
+                resultWords.append(word)
+            board[row][col] = '#'
+            
+            for row_off, col_off in [(-1,0),(0,1),(1,0),(0,-1)]:
+                newrow, newcol = row + row_off, col + col_off
+                if newrow < rows and newrow>=0 and newcol < cols and newcol >=0:
+                    if board[newrow][newcol] in currentNode:
+                        backtrack(newrow, newcol, currentNode)
+            board[row][col] = letter
+            if not currentNode:
+                parent.pop(letter)
+            
+                        
+        for row in range(rows):
+            for col in range(cols):
+                if board[row][col] in trie:
+                    backtrack(row, col, trie)
+        return resultWords
+           
