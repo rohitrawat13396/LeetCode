@@ -18,3 +18,17 @@ class Solution:
             nums.remove(0)
             count += 1
         nums.extend([0]*count)
+  
+
+   #MEthod 1. O(n) and O(1), time and space, optimal.  
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        
+        lnz = 0
+        for c in range(len(nums)):
+            if nums[c] != 0:
+                nums[lnz], nums[c] = nums[c], nums[lnz]
+                lnz += 1
