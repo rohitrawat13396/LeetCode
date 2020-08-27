@@ -17,20 +17,33 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         
+#         if not nums:
+#             return 0
+        
+#         dp = [0]*len(nums)
+#         dp[0] = 1
+#         max_ans = 1
+#         for i in range(1,len(nums)):
+#             maxval = 0
+#             for j in range(0,i):
+#                 if nums[i]> nums[j]:
+#                     maxval = max(maxval,dp[j])
+#             dp[i] = maxval +1
+#             max_ans = max(max_ans, dp[i])
+            
+#         return max_ans
+    
+#Method1. DP with BinarySearch
         if not nums:
             return 0
-        
-        dp = [0]*len(nums)
-        dp[0] = 1
-        max_ans = 1
+        list_ans = [nums[0]]
         for i in range(1,len(nums)):
-            maxval = 0
-            for j in range(0,i):
-                if nums[i]> nums[j]:
-                    maxval = max(maxval,dp[j])
-            dp[i] = maxval +1
-            max_ans = max(max_ans, dp[i])
-            
-        return max_ans
-            
-        
+            if nums[i]<list_ans[0]:
+                list_ans[0] = nums[i]
+            elif nums[i] > list_ans[-1]:
+                list_ans.append(nums[i])
+            else:
+                idx = bisect_left(list_ans, nums[i])
+                list_ans[idx] = nums[i]
+        return len(list_ans)
+                
