@@ -1,0 +1,54 @@
+# 581. Shortest Unsorted Continuous Subarray
+
+# Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too.
+
+# You need to find the shortest such subarray and output its length.
+
+# Example 1:
+# Input: [2, 6, 4, 8, 10, 9, 15]
+# Output: 5
+# Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+# Note:
+# Then length of the input array is in range [1, 10,000].
+# The input array may contain duplicates, so ascending order here means <=.
+
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        #Method0. Using sorting in O(nlogn) and O(n)
+#         if len(nums)<2:
+#             return 0
+#         nums_sorted = sorted(nums)
+#         start = end = float('inf')
+#         for i in range(len(nums)):
+#             if nums[i] != nums_sorted[i]:
+#                 start = i
+#                 break
+#         for i in range(len(nums)-1,-1,-1):
+#             if nums[i] != nums_sorted[i]:
+#                 end = i
+#                 break
+#         return end-start+1 if start != float("inf") and end != float("inf") else 0
+        
+        #MEthod1. Using No extra space and O(n)
+        
+        if len(nums)<2:
+            return 0
+        for i in range(1,len(nums)):
+            if nums[i] < nums[i-1]:
+                 break
+        min_v = min(nums[i:])
+        for i in range(len(nums)-2,-1,-1):
+            if nums[i]> nums[i+1]:
+                break
+        max_v = max(nums[:i+1])
+        
+        for i in range(len(nums)):
+            if nums[i]>min_v:
+                break
+        for j in range(len(nums)-1,-1,-1):
+            if nums[j] < max_v:
+                break
+        return j-i+1 if j-i >= 0 else 0
+                
+        
+            
