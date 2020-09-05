@@ -1,0 +1,54 @@
+# 438. Find All Anagrams in a String
+
+# Example 1:
+
+# Input:
+# s: "cbaebabacd" p: "abc"
+
+# Output:
+# [0, 6]
+
+# Explanation:
+# The substring with start index = 0 is "cba", which is an anagram of "abc".
+# The substring with start index = 6 is "bac", which is an anagram of "abc".
+# Example 2:
+
+# Input:
+# s: "abab" p: "ab"
+
+# Output:
+# [0, 1, 2]
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        #Method0. Dict
+#         counter_p = Counter(p)
+#         counter_s = Counter()
+#         if len(p)>len(s):
+#             []
+#         res = []
+#         for i in range(len(s)):
+#             counter_s[s[i]] +=1            
+#             if i >= len(p):
+#                 if counter_s[s[i-len(p)]]==1:
+#                     del counter_s[s[i-len(p)]]
+#                 else:
+#                     counter_s[s[i-len(p)]] -=1 
+                    
+#             if counter_p == counter_s:
+#                 res.append(i-len(p)+1)    
+#         return res
+
+        # Method1. hash function
+        S,P = 0,0
+        sol = []
+        if len(s)<len(p):
+            return []
+        for i in range(len(p)):
+            P, S = P+hash(p[i]), S + hash(s[i])
+        if P == S:
+            sol.append(0)
+        for i in range(len(p),len(s)):
+            S += hash(s[i]) - hash(s[i-len(p)])
+            if S == P:
+                sol.append(i-len(p)+1)
+        return sol
