@@ -1,0 +1,30 @@
+# 647. Palindromic Substrings
+# Example 1:
+
+# Input: "abc"
+# Output: 3
+# Explanation: Three palindromic strings: "a", "b", "c".
+ 
+
+# Example 2:
+
+# Input: "aaa"
+# Output: 6
+# Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+        
+class Solution:
+    def countSubstrings(self, s: str) -> int:  
+        
+        #Method0. Expand from centers
+        length = len(s)
+        count = 0        
+        for c in range(2*length-1):
+            l = int(c/2)
+            r = l + c%2
+            while l>=0 and r< length and s[l] == s[r]:
+                count +=1
+                l -=1
+                r +=1
+        return count
+            
+            
