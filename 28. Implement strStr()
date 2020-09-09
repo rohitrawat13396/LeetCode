@@ -1,0 +1,29 @@
+# 28. Implement strStr()
+# Example 1:
+
+# Input: haystack = "hello", needle = "ll"
+# Output: 2
+# Example 2:
+
+# Input: haystack = "aaaaa", needle = "bba"
+# Output: -1
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if len(needle) > len(haystack):
+            return -1
+        if len(haystack) ==0 or len(needle) == 0:
+            return 0
+        i=0
+        while i <len(haystack)-len(needle)+1:
+            if haystack[i:i+len(needle)] == needle:
+                return i
+            i+=1
+        return -1
+        
+    #Method1
+        if needle in haystack:
+            return haystack.index(needle)
+        return -1
+                
+                 
