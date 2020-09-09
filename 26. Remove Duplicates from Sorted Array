@@ -1,0 +1,15 @@
+# 26. Remove Duplicates from Sorted Array
+
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums)<2:
+            return len(nums)
+        ind = 0        
+        for i in range(1,len(nums)):
+            if nums[i] != nums[i-1]:
+                nums[ind+1] = nums[i]
+                # nums[ind] = nums[i-1]
+                ind +=1
+        # nums[ind] = nums[i]
+        return ind+1
