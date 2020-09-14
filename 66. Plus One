@@ -1,0 +1,35 @@
+# 66. Plus One
+# Example 1:
+
+# Input: digits = [1,2,3]
+# Output: [1,2,4]
+# Explanation: The array represents the integer 123.
+# Example 2:
+
+# Input: digits = [4,3,2,1]
+# Output: [4,3,2,2]
+# Explanation: The array represents the integer 4321.
+    
+class Solution:
+    def plusOne(self, nums: List[int]) -> List[int]:
+        carry = 0
+        nums[len(nums)-1] += 1 
+        
+        for i in range(len(nums)-1,-1,-1):
+            nums[i] = nums[i] +  carry
+            if nums[i]>9:
+                carry = 1
+                nums[i] = nums[i]%10
+                continue
+            else:
+                carry = 0
+                break
+        if carry:
+            nums = nums[::-1]
+            nums.append(carry)
+            nums = nums[::-1]
+            
+        return nums
+            
+                
+            
