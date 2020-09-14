@@ -25,9 +25,7 @@ class Solution:
                 carry = 0
                 break
         if carry:
-            nums = nums[::-1]
-            nums.append(carry)
-            nums = nums[::-1]
+            nums = [carry] + nums
             
         return nums
             
