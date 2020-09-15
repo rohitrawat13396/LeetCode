@@ -1,4 +1,5 @@
 # 66. Plus One
+
 # Example 1:
 
 # Input: digits = [1,2,3]
@@ -25,8 +26,7 @@ class Solution:
                 carry = 0
                 break
         if carry:
-            nums = [carry] + nums
-            
+            nums = [carry] + nums            
         return nums
             
                 
