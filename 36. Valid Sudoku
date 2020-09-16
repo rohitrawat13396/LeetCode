@@ -1,0 +1,35 @@
+# 36. Valid Sudoku
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+#         for i in range(9):
+#             dic = {} 
+#             for j in range(9):
+#                 if board[i][j] in dic and board[i][j] != ".":
+#                     return False
+#                 dic[board[i][j]] = True
+        
+#         for i in range(9):
+#             dic = {} 
+#             for j in range(9):
+#                 if board[j][i] in dic and board[j][i] != ".":
+#                     return False
+#                 dic[board[j][i]] = True
+                
+#         for i in range(9):
+#             dic = {} 
+#             for j in range(9):
+#                 x = (i%3)*3 + j%3
+#                 y = (i//3)*3 + j//3
+#                 print(i,j,x,y)
+#                 if board[x][y] in dic and board[x][y] != ".":
+#                     return False
+#                 dic[board[x][y]] = True
+#         return True
+    #Method1. Best Solution
+        seen = []
+        for i ,row in enumerate(board):
+            for j ,c in enumerate(row):
+                if c!=".":
+                    seen+=[(j,c),(c,i),(i//3,j//3,c)]
+        return len(seen)==len(set(seen))
