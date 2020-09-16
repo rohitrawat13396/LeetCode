@@ -1,0 +1,30 @@
+# 38. Count and Say
+# The count-and-say sequence is the sequence of integers with the first five terms as following:
+
+# 1.     1
+# 2.     11
+# 3.     21
+# 4.     1211
+# 5.     111221
+
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        temp = "1"
+        
+        if n == 1:
+            return temp
+        sol = temp
+        cnt = 1        
+        for _ in range(n-1):
+            temp = ""
+            for i in range(len(sol)):
+                if i== len(sol)-1 or sol[i] != sol[i+1]:
+                    temp += str(cnt) + sol[i]
+                    cnt = 1
+                else:
+                    cnt +=1
+            sol = temp
+        return sol
+                
+            
+            
