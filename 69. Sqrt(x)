@@ -1,0 +1,27 @@
+# 69. Sqrt(x)
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        #method0. Very slow but no TLE
+        # i = 0
+        # while True:
+        #     if i*i <= x and (i+1)*(i+1)>x:
+        #         return i
+        #     i+=1
+        
+        #Method1. 
+        if x<2:
+            return x
+        l,r = 2, x//2
+        
+        while l<=r:
+            pivot = l+(r-l)//2
+            num = pivot*pivot
+            if num>x:
+                r = pivot-1
+            elif num<x:
+                l = pivot+1
+            else:
+                return pivot
+        return r
+                
