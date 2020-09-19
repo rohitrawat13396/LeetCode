@@ -1,0 +1,22 @@
+# 125. Valid Palindrome
+# Example 1:
+
+# Input: "A man, a plan, a canal: Panama"
+# Output: true
+# Example 2:
+
+# Input: "race a car"
+# Output: false
+    
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        string = ""
+        s = s.lower()
+        for i in s:
+            if i.isalnum():
+                string += i
+
+        if string == string[::-1]:
+            return True
+        else:
+            return False
