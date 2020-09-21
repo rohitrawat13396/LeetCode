@@ -1,0 +1,24 @@
+# 171. Excel Sheet Column Number
+# Example 1:
+
+# Input: "A"
+# Output: 1
+# Example 2:
+
+# Input: "AB"
+# Output: 28
+# Example 3:
+
+# Input: "ZY"
+# Output: 701
+
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        val = [i for i in range(1, 27)]
+        letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        d = dict(zip(letters, val))
+        def _helper(s, res, d):
+            if not s: return res
+            res = res * 26 + d[s[0]]
+            return _helper(s[1:], res, d)
+        return _helper(s, 0, d)
