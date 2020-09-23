@@ -1,0 +1,54 @@
+# 116. Populating Next Right Pointers in Each Node
+
+# Input: root = [1,2,3,4,5,6,7]
+# Output: [1,#,2,3,#,4,5,6,7,#]
+# Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+         
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        #Method0. level order traversal
+        # if not root:
+        #     return root
+        # Q = deque([root])
+        # while Q:
+        #     size = len(Q)
+        #     for i in range(size):
+        #         n = Q.popleft()
+        #         if i < size-1:
+        #             n.next = Q[0]
+        #         if n.left:
+        #             Q.append(n.left)
+        #         if n.right:
+        #             Q.append(n.right)
+        # return root
+    #Method1 with constant space
+        if not root:
+            return root
+        leftmost = root
+        while leftmost.left:
+            
+            head = leftmost
+            while head:
+                
+                head.left.next = head.right
+                if head.next:
+                    head.right.next = head.next.left
+                
+                head = head.next
+            leftmost = leftmost.left
+        return root
+                
+                    
+                
+            
+            
