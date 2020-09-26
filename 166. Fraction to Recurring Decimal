@@ -1,19 +1,25 @@
-#166. Fraction to Recurring Decimal
+# 166. Fraction to Recurring Decimal
 class Solution:
     def fractionToDecimal(self, numerator: int, denominator: int) -> str:
-        ans = float(numerator/denominator)
-        print(ans)
+
+        nsign = False
+        if numerator*denominator < 0:
+            nsign = True
+        numerator, denominator = abs(numerator), abs(denominator)        
+        new = numerator % denominator
+        prev = numerator//denominator
         
-        if ans.is_integer():
-            return str(int(ans))
-        else:
-            ans = str(ans).split(".")
-            rep = ""
-            for i in range(len(ans[1])):
-                print(rep,ans[1][i:i+len(rep)+1])
-                if rep == ans[1][i:i+len(rep)+1]:
-                    return ans[0] +".("+ rep + ")"
-                else:
-                    rep = rep + ans[1][i]
-            
-        return str(ans)
+        if new == 0:
+            return ("-" if nsign else "") + str(prev)        
+
+        frac, dic_appeared = "", {}
+        pos = 0
+        while new not in dic_appeared:
+            if new == 0:
+                return ("-" if nsign else "") + str(prev) + "." + frac
+            else:
+                dic_appeared[new] = pos
+                pos += 1 
+                frac += str(new*10//denominator)
+                new = (new*10)% denominator
+        return ("-" if nsign else "") + str(prev) + "." + frac[:dic_appeared[new]] + "(" +  frac[dic_appeared[new]:] + ")"           
