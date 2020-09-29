@@ -1,0 +1,8 @@
+# 191. Number of 1 Bits
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        for x in (bin(n)[2:]):
+            if x == '1':
+                count +=1
+        return count
