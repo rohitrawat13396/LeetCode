@@ -1,0 +1,26 @@
+# 242. Valid Anagram
+
+# Example 1:
+
+# Input: s = "anagram", t = "nagaram"
+# Output: true
+# Example 2:
+
+# Input: s = "rat", t = "car"
+# Output: false
+
+# class Solution:
+#     def isAnagram(self, s: str, t: str) -> bool:
+#         if len(s)!=len(t):
+#             return False
+            
+#         s_dic = Counter(s)
+#         for st in t:
+#             if s_dic[st]:
+#                 s_dic[st] -=1
+#             else:
+#                 return False
+#         return True
+            
+            
+        
