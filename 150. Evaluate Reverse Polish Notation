@@ -1,0 +1,21 @@
+# 150. Evaluate Reverse Polish Notation
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        if not tokens:
+            return 0
+        stack = []
+
+        # def divide(x,y):
+        #     sign = False
+        #     if (x<0 and y>0) or (x>0 and y<0):
+        #         sign = True
+        #     return abs(y)//abs(x) if not sign else -1*(abs(y)//abs(x))        
+        operators = {'+': (lambda x,y: x+y),'-':(lambda x,y: y-x),'*':(lambda x,y: x*y),'/': lambda x,y : int(y/x)}
+        
+        for i in range(len(tokens)):
+            if tokens[i] in operators:
+                x,y = stack.pop(),stack.pop()
+                stack.append(operators[tokens[i]](x,y))
+            else:
+                stack.append(int(tokens[i]))
+        return stack[-1]
