@@ -1,0 +1,32 @@
+# 289. Game of Life
+
+class Solution:
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        nbhs = [(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+        
+        # new_board = [[0]*len(board[0]) for _ in range(len(board))]
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                popul = 0 
+                for (dx,dy) in nbhs:
+                    if i+dx >=0 and i+dx < len(board) and j+dy >=0 and j+dy < len(board[0]) and board[i+dx][j+dy] in (1,-1):                popul +=1
+                if board[i][j] in (1,-1):
+                    if popul <2 or popul >3:
+                        board[i][j] = -1
+                elif board[i][j] in (0,2) and popul == 3:
+                    board[i][j] = 2
+        # board[:]= new_board[:]
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == -1:
+                    board[i][j] = 0
+                elif board[i][j] == 2:
+                    board[i][j] = 1
+        
+                
+                
+                
