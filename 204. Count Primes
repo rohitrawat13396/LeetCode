@@ -1,0 +1,17 @@
+# 204. Count Primes
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 2:
+            return 0
+        a = [1]*(n)
+        a[0] = a[1] = 0
+        rootn = int(math.sqrt(n))
+        for i in range(2, rootn+1):
+            if not a[i]:
+                continue
+            j = i**2            
+            while j<n:
+                a[j] = 0
+                j += i
+        return sum(a)
+                
