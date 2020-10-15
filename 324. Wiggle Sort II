@@ -1,10 +1,48 @@
 # 324. Wiggle Sort II
 class Solution:
+               
     def wiggleSort(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-        nums.sort()
-        h = len(nums[::2])
-        nums[::2], nums[1::2] = nums[:h][::-1],nums[h:][::-1]
+        #O(nlogn)
+        # nums.sort()
+        # h = len(nums[::2])
+        # nums[::2], nums[1::2] = nums[:h][::-1],nums[h:][::-1]
+        
+        # O(n) but too  slow
+        def quicks(l,h,arr,mid):
+                # print(arr)
+            pivot = random.randint(l,h)
+            arr[h],arr[pivot] = arr[pivot], arr[h]
+            pivot = l
+            for i in range(l,h):
+                if arr[i]<arr[h]:
+                    arr[i],arr[pivot] = arr[pivot], arr[i]
+                    pivot +=1
+            arr[pivot], arr[h] = arr[h], arr[pivot]
+            if mid == pivot:
+                ans = arr[pivot]
+                return arr[pivot]        
+            elif mid < pivot:
+                return quicks(l, pivot-1, arr, mid)
+            else:
+                return quicks(pivot+1, h, arr, mid)       
+        mid = len(nums)//2
+        median = quicks(0,len(nums)-1,nums,mid)
+                # virtual index
+            
+        vi = lambda x: x * 2 + 1 if x < mid else (x - mid) * 2        
+        i, j, k = 0, 0, len(nums) - 1
+        while j <= k:
+            if nums[vi(j)] < median:
+                nums[vi(j)], nums[vi(k)] = nums[vi(k)], nums[vi(j)]
+                k -= 1
+            elif nums[vi(j)] > median:
+                nums[vi(j)], nums[vi(i)] = nums[vi(i)], nums[vi(j)]
+                i += 1
+                j += 1
+            else:
+                j += 1
+                
         
