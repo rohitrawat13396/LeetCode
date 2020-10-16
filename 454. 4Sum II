@@ -1,15 +1,26 @@
 # 454. 4Sum II
 class Solution:
     def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
-        
-        dic1 = defaultdict(int)
-        for i in range(len(A)):
-            for j in range(len(B)):
-                dic1[A[i]+B[j]] += 1
+        # Using one dic with O(n**2)
+        # dic1 = defaultdict(int)
+        # for i in range(len(A)):
+        #     for j in range(len(B)):
+        #         dic1[A[i]+B[j]] += 1
+        # count = 0
+        # for i in range(len(C)):
+        #     for j in range(len(D)):
+        #         if -(C[i] + D[j]) in dic1:
+        #             count += dic1[-(C[i] + D[j])]
+        # return count
+        #Using Counter for each list with O(N*M) : Count of two highest number of unique elemnts from the lists
+        dic_A,dic_B,dic_C,dic_D = Counter(A),Counter(B),Counter(C),Counter(D)
+        dic = defaultdict(int)
+        for i,v1 in dic_A.items():
+            for j,v2 in dic_B.items():
+                dic[i+j] += v1*v2
         count = 0
-        for i in range(len(C)):
-            for j in range(len(D)):
-                if -(C[i] + D[j]) in dic1:
-                    count += dic1[-(C[i] + D[j])]
+        for i,v1 in dic_C.items():
+            for j,v2 in dic_D.items():
+                if -(i+j) in dic:
+                    count+= v1*v2*dic[-(i+j)]
         return count
-            
