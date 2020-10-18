@@ -1,0 +1,25 @@
+# 43. Multiply Strings
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        # return str(int(num1)*int(num2))
+        # carry1 = 1
+        # res = 0
+        # for i in num1[::-1]:
+        #     carry2 = 1
+        #     for j in num2[::-1]:
+        #         res += (ord(i)-48)*(ord(j)-48)*carry1*carry2
+        #         carry2 *=10
+        #     carry1 *=10
+        # return str(res)
+        
+        n1 = 0
+        for s in num1:
+            rem = ord(s)-48
+            n1 = n1*10 + rem
+        n2 = 0
+        for s in num2:
+            rem = ord(s)-48
+            n2 = n2*10 + rem
+        return str(n1*n2)
+        
+        
