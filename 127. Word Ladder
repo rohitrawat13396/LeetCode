@@ -1,0 +1,66 @@
+# # 127. Word Ladder
+# Example 1:
+
+# Input:
+# beginWord = "hit",
+# endWord = "cog",
+# wordList = ["hot","dot","dog","lot","log","cog"]
+
+# Output: 5
+
+# Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+# return its length 5.
+
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        
+        if endWord not in wordList or not endWord or not beginWord or not wordList:
+            return 0
+        
+        dic = defaultdict(list)
+        for w in wordList:
+            for i in range(len(w)):
+                dic[w[:i]+'*'+w[i+1:]].append(w)
+        
+        # Q = deque([(beginWord, 1)])
+        # visited = {beginWord: True}
+        # while Q:
+        #     curr_w, l = Q.popleft()
+        #     for i in range(len(beginWord)):
+        #         itm_w = curr_w[:i]+"*" +curr_w[i+1:]
+        #         for word in dic[itm_w]:
+        #             if word == endWord:
+        #                 return l + 1
+        #             if word not in visited:
+        #                 visited[word] = True
+        #                 Q.append((word,l+1))
+        #         dic[itm_w] = []
+        # return 0
+        Q_b = deque([(beginWord, 1)])
+        Q_e = deque([(endWord, 1)])
+        
+        visited_b = {beginWord: 1}
+        visited_e = {endWord: 1}
+        
+        while Q_b and Q_e:
+            curr_w_b, l_b = Q_b.popleft()
+            curr_w_e, l_e = Q_e.popleft()
+            for i in range(len(curr_w_b)):
+                itm_w_b = curr_w_b[:i] + "*" + curr_w_b[i+1:]
+                itm_w_e = curr_w_e[:i] + "*" + curr_w_e[i+1:]
+                for w in dic[itm_w_b]:
+                    if w in visited_e:
+                        return l_b + visited_e[w]
+                    if w not in visited_b:
+                        visited_b[w] = l_b+1
+                        Q_b.append((w,l_b+1))
+                for w in dic[itm_w_e]:
+                    if w in visited_b:
+                        return l_e + visited_b[w]
+                    if w not in visited_e:
+                        visited_e[w] = l_e+1
+                        Q_e.append((w,l_e+1))
+        return 0
+
+                
+        
