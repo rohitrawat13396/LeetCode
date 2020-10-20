@@ -1,0 +1,45 @@
+# 130. Surrounded Regions
+# from itertools import product
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]:
+            return 
+        self.rows = len(board)
+        self.cols = len(board[0])
+        borders = set(list(product(range(self.rows),[0,self.cols-1])) + list(product([0,self.rows-1],range(self.cols))))
+        
+        for r,c in borders:
+            self.bfs(r,c,board)
+            
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if board[r][c] == 'O': board[r][c] = 'X'
+                elif board[r][c] == 'E': board[r][c] = 'O'
+                    
+    def dfs(self,r,c,board):
+        if r<0 or r>=self.rows or c<0 or c>= self.cols:
+            return
+        if board[r][c] != 'O':
+            return
+        board[r][c] = 'E'
+        for dx,dy in [(0,1),(1,0),(0,-1),(-1,0)]:
+            self.dfs(r+dx,c+dy,board)
+            
+    def bfs(self,ro,co, board):
+        Q = deque([(ro,co)])
+        while Q:
+            r,c = Q.popleft()
+            if board[r][c] != 'O':
+                continue
+            board[r][c] = 'E'
+            if r>0: Q.append((r-1,c))
+            if r<self.rows-1: Q.append((r+1,c))
+            if c>0: Q.append((r,c-1))
+            if c< self.cols-1: Q.append((r,c+1))
+                    
+                
+                 
+        
