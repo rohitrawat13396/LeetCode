@@ -1,0 +1,16 @@
+# 140. Word Break II
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        
+        def backtracking(bs: str, cs):
+            if not bs:
+                result.append(cs[:-1])
+            
+            for i in range(1,len(bs)+1):
+                if bs[:i] in wordDict: 
+                    backtracking(bs[i:], cs + bs[:i] + " ")
+    
+        wordDict = set(wordDict)
+        result = []
+        backtracking(s, "")
+        return result
