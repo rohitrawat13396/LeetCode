@@ -14,3 +14,33 @@ class Solution:
         result = []
         backtracking(s, "")
         return result
+        
+ # 140. Word Break II
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        
+        def backtracking(bs: str):
+            if bs in memo:
+                return memo[bs]
+            if bs == "":
+                return None
+                # result.append(cs[:-1])
+            sol= []
+            for i in range(len(bs)+1):
+                if bs[:i] in wordDict: 
+                    res = backtracking(bs[i:])
+                    if res == None:
+                        sol.append(bs[:i])
+                    else:
+                        for string in res:
+                            print(string)
+                            sol.append(bs[:i] + " " + string)
+            memo[bs] = sol
+            return sol
+    
+        wordDict = set(wordDict)
+        result = []
+        memo = {}
+        return backtracking(s)
+
+
