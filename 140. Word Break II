@@ -43,4 +43,31 @@ class Solution:
         memo = {}
         return backtracking(s)
 
+# 140. Word Break II
+#Faster with indices
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        
+        def backtracking(bs):
+            if s[bs:] in memo:
+                return memo[s[bs:]]
+            if s[bs:] == "":
+                return None
+            sol= []
+            for i in range(bs,len(s)+1):
+                if s[bs:i] in wordDict: 
+                    res = backtracking(i)
+                    if res == None:
+                        sol.append(s[bs:i])
+                    else:
+                        for string in res:
+                            sol.append(s[bs:i] + " " + string)
+            memo[s[bs:]] = sol
+            return sol
+    
+        wordDict = set(wordDict)
+        result = []
+        memo = {}
+        return backtracking(0)
+
 
