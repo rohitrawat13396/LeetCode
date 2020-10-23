@@ -1,0 +1,29 @@
+# 149. Max Points on a Line
+from fractions import Fraction
+
+class Solution:
+    def maxPoints(self, points: List[List[int]]) -> int:
+
+        if len(points)<3: return len(points)
+        
+        dic = defaultdict(set)
+        
+        points = [tuple(p) for p in points]
+        d_count = Counter(points)
+        points = list(d_count)
+        
+        if len(points) ==1: return max(d_count.values())
+        
+        for i in range(len(points)):
+            x1,y1 = points[i][0],points[i][1]
+            for j in range(i+1,len(points)):
+                    x2,y2 = points[j][0],points[j][1]                    
+                    # if x1 != x2 and y1 != y2:
+                    if x2 - x1 != 0:
+                        key = Fraction(y2-y1,x2-x1)
+                        key = (key.numerator,key.denominator,y1-(key.numerator/key.denominator)*x1)
+                    else:
+                        key = (x1, 'inf')
+                    dic[key].add(points[i])
+                    dic[key].add(points[j])
+        return max([sum(d_count[p] for p in dic[key]) for key in dic.keys()])
