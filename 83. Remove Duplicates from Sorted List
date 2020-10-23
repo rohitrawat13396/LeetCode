@@ -7,22 +7,37 @@
 #         self.next = next
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        head1 = head
-        dic= set()
-        while head:
-            dic.add(head.val)
-            head = head.next
-        dic = list(dic)
-        dic.sort()
-        head = head1
-        for x in dic:
-            head.val = x
-            prev = head
-            head = head.next
-        if head:
-            prev.next = None
-        return head1
+        #MEthod0. O(nlogn) and O(n)
+        # head1 = head
+        # dic= set()
+        # while head:
+        #     dic.add(head.val)
+        #     head = head.next
+        # dic = list(dic)
+        # dic.sort()
+        # head = head1
+        # for x in dic:
+        #     head.val = x
+        #     prev = head
+        #     head = head.next
+        # if head:
+        #     prev.next = None
+        # return head1
+        
+        #MEthod1 O(n) and O(1)
 
+        if not head:
+            return head        
+        head1 = head
+        prev = head
+        while head:
+            if head.val != prev.val:
+                prev.next = head
+                prev = head
+            head = head.next
+        prev.next = None
+        return head1
+            
             
             
                 
