@@ -1,22 +1,27 @@
 # 30. Substring with Concatenation of All Words
+# Example 1:
+
+# Input: s = "barfoothefoobarman", words = ["foo","bar"]
+# Output: [0,9]
+# Explanation: Substrings starting at index 0 and 9 are "barfoo" and "foobar" respectively.
+# The output order does not matter, returning [9,0] is fine too.
 
 class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        if not s or not words:
+            return []
         c_w = Counter(words)
         swl = len(words[0])*len(words)
         sol = []
-        found = False
-        # for i in range(len(s)):
         i= 0
-        while i < len(s):
-
+        # print(c_w)
+        while i < len(s)-len(words[0])+1:
             sw = s[i:i+swl]
-            c_tw = Counter([sw[j:j+len(words[0])] for j in range(0,len(sw),len(words[0])) ])
-            if c_tw & c_w:
+            c_tw = Counter([sw[j:j+len(words[0])] for j in range(0,len(sw),len(words[0]))])
+            # print(i,(c_tw & c_w) == c_w)
+            if (c_tw & c_w) == c_w:
                 sol.append(i)
-                found = True
-            i += 1
-
+            i += 1        
         return sol
                 
             
