@@ -1,0 +1,28 @@
+# 30. Substring with Concatenation of All Words
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        c_w = Counter(words)
+        swl = len(words[0])*len(words)
+        sol = []
+        found = False
+        # for i in range(len(s)):
+        i= 0
+        while i < len(s):
+
+            sw = s[i:i+swl]
+            c_tw = Counter([sw[j:j+len(words[0])] for j in range(0,len(sw),len(words[0])) ])
+            if c_tw & c_w:
+                sol.append(i)
+                found = True
+            i += 1
+
+        return sol
+                
+            
+                
+                
+            
+        
+        
+        
