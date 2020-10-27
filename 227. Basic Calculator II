@@ -1,0 +1,22 @@
+# 227. Basic Calculator II
+class Solution:
+    def calculate(self, s: str) -> int:
+        stack = []
+        currNum = 0
+        operation = "+"
+        for i in range(len(s)):
+            # print(stack,s[i])
+            if s[i].isnumeric():
+                currNum =(currNum * 10) + int(s[i])
+            if not s[i].isnumeric() and s[i]!= " " or i == len(s)-1:    
+                if operation == ("+"):
+                    stack.append(currNum)
+                elif operation == ("-"):
+                    stack.append(-currNum)
+                elif operation == "*":
+                    stack.append(stack.pop() * currNum)
+                elif operation == ( "/"):
+                    stack.append(int(stack.pop()/currNum))
+                operation = s[i]
+                currNum = 0
+        return sum(stack)
