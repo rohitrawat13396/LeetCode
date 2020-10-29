@@ -1,0 +1,16 @@
+# 395. Longest Substring with At Least K Repeating Characters
+
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        
+        if len(s)==0:
+            return 0
+        
+        cnt = collections.Counter(s)
+        
+        for i in cnt:
+            if cnt[i] < k:
+                # print(s.split(i))
+                return max(self.longestSubstring(p,k) for p in s.split(i))
+                
+        return len(s)
