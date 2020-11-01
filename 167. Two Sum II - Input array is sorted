@@ -1,0 +1,11 @@
+# 167. Two Sum II - Input array is sorted
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        dic = defaultdict(list)
+        for i in range(len(numbers)):
+            
+            rem = target - numbers[i]
+            if rem not in dic:
+                dic[numbers[i]].append(i)
+            else:
+                return (dic[rem][0]+1,i+1)
