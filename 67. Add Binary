@@ -1,31 +1,33 @@
 # 67. Add Binary
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
-        if len(a)> len(b):
-            b = '0'*(len(a)-len(b)) + b
-        else:
-            a = '0'*(len(b)-len(a)) + a
-        # print(a,b)
-        res = ''
-        carry = 0
-        for i,j in zip(a[::-1],b[::-1]):
-            if int(i)+int(j)+ carry == 0:
-                res = '0' + res
-                carry = 0
-            if int(i)+int(j)+ carry == 1:
-                res = '1' + res
-                carry = 0
-            elif int(i)+int(j)+ carry == 2:
-                res = '0' + res
-                carry = 1
-            elif int(i)+int(j)+ carry == 3:
-                res = '1' + res
-                carry = 1
-            else:
-                print("something is wrong!")
-        if carry:
-            return '1'+res
-        return res
+        return str(bin(int(a,2)+ int(b,2))[2:])
+
+#         if len(a)> len(b):
+#             b = '0'*(len(a)-len(b)) + b
+#         else:
+#             a = '0'*(len(b)-len(a)) + a
+#         # print(a,b)
+#         res = ''
+#         carry = 0
+#         for i,j in zip(a[::-1],b[::-1]):
+#             if int(i)+int(j)+ carry == 0:
+#                 res = '0' + res
+#                 carry = 0
+#             if int(i)+int(j)+ carry == 1:
+#                 res = '1' + res
+#                 carry = 0
+#             elif int(i)+int(j)+ carry == 2:
+#                 res = '0' + res
+#                 carry = 1
+#             elif int(i)+int(j)+ carry == 3:
+#                 res = '1' + res
+#                 carry = 1
+#             else:
+#                 print("something is wrong!")
+#         if carry:
+#             return '1'+res
+#         return res
                 
                 
                 
