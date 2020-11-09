@@ -1,0 +1,26 @@
+# 61. Rotate List
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        head2 = head
+        l = []
+        if not head:
+            return head
+        while head:
+            l.append(head.val)
+            head = head.next
+        if k > len(l):    
+            k = k%len(l)        
+        l = l[-k:]+l[:-k]
+        head = head2
+        i = 0
+        while head:
+            head.val = l[i]
+            i+=1
+            head = head.next
+        return head2
