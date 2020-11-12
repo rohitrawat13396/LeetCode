@@ -1,16 +1,28 @@
-# 412. Fizz Buzz
 class Solution:
     def fizzBuzz(self, n: int) -> List[str]:
-        if n<0:
+        # if n<0:
+        #     return []
+        # sol = []
+        # for i in range(1,n+1):
+        #     if i%3 ==0 and i%5==0:
+        #         sol.append("FizzBuzz")
+        #     elif i%3==0:
+        #         sol.append("Fizz")
+        #     elif i%5==0:
+        #         sol.append("Buzz")
+        #     else:
+        #         sol.append(str(i))
+        # return sol
+        
+        #Lash method
+        if n<=0:
             return []
+        arr = ["Fizz","Buzz","FizzBuzz"]
         sol = []
         for i in range(1,n+1):
-            if i%3 ==0 and i%5==0:
-                sol.append("FizzBuzz")
-            elif i%3==0:
-                sol.append("Fizz")
-            elif i%5==0:
-                sol.append("Buzz")
-            else:
-                sol.append(str(i))
+            ind = floor(i%3/-3) + 2*(floor(i%5/-5) + 1)
+            sol.append(arr[ind]) if ind != -1 else sol.append(str(i))
         return sol
+                
+        
+            
