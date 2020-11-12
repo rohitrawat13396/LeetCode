@@ -6,6 +6,7 @@ class Solution:
                         if ((target-i == nums[j]) and (j!=nums.index(i))):
                             x= nums.index(i)
                             return[x,j]
+                            
 
 
         '''
