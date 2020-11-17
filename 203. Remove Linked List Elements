@@ -1,0 +1,22 @@
+# 203. Remove Linked List Elements
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        prev = None
+        head2 = head
+        while head:
+            if head.val == val:
+                if not prev:
+                    head2 = head.next
+                else:
+                    prev.next = head.next
+            else:
+                prev = head
+            head = head.next
+        return head2
+                
+        
