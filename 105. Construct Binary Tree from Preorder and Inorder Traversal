@@ -33,3 +33,31 @@ class Solution:
         root.right= self.buildTree(preorder[i+1:], inorder[i+1:])
         
         return root
+        
+# O(n) solution using dictionary
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        
+        self.dic = {}
+        self.pre_idx = 0
+        def helper(start = 0, end = len(inorder)):
+
+            if start == end:
+                return 
+            root = TreeNode(preorder[self.pre_idx])
+            i = self.dic[preorder[self.pre_idx]]
+            self.pre_idx +=1
+            root.left = helper(start,i)
+            root.right = helper(i+1,end)
+            return root
+        
+        self.dic = {val:idx for idx, val in enumerate(inorder)}  
+        return helper(0,len(inorder))
